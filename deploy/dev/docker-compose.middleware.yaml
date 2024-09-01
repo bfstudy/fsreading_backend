@@ -45,7 +45,7 @@ services:
       SPRING_DATASOURCE_USERNAME: apollo
       SPRING_DATASOURCE_PASSWORD: admin
       APOLLO_PORTAL_ENVS: dev
-      DEV_META: http://172.18.0.3:8080
+      DEV_META: http://172.18.0.2:8080
     volumes:
       - ./volumes/apollo/protal/logs:/opt/logs
     ports:
