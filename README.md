@@ -28,3 +28,5 @@ GRANT ALL ON *.* TO 'apollo'@'%';
 ```
 3. 记得通过`docker inspect fs-apollo-config`查看config服务的IP地址，然后在configDB的serverconfig表中
 修改eureka.service.url的localhost地址为config服务的IP地址。
+4. apollo的client最好使用这个仓库：https://github.com/red-butterfly/pyapollo
+5. 

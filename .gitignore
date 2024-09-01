@@ -2,3 +2,7 @@
 .idea/
 volumes/
 
+__pycache__/
+
+.env
+
