@@ -12,14 +12,14 @@ services:
 
   apollo_config_service:
     image: apolloconfig/apollo-configservice:2.3.0
-    container_name: fs-apollo-configs
+    container_name: fs-apollo-config
     restart: always
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://fs-mysql:3306/ApolloConfigDB?characterEncoding=utf8
       SPRING_DATASOURCE_USERNAME: apollo
       SPRING_DATASOURCE_PASSWORD: admin
     volumes:
-      - ./volumes/apollo/configs/logs:/opt/logs
+      - ./volumes/apollo/config/logs:/opt/logs
     ports:
       - "8080:8080"
 
