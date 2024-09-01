@@ -1,0 +1,53 @@
+services:
+  mysql_db:
+    image: mysql/mysql-server:8.0
+    container_name: fs-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: fs1234
+    volumes:
+      - ./volumes/mysql/data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  apollo_config_service:
+    image: apolloconfig/apollo-configservice:2.3.0
+    container_name: fs-apollo-config
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://fs-mysql:3306/ApolloConfigDB?characterEncoding=utf8
+      SPRING_DATASOURCE_USERNAME: apollo
+      SPRING_DATASOURCE_PASSWORD: admin
+    volumes:
+      - ./volumes/apollo/config/logs:/opt/logs
+    ports:
+      - "8080:8080"
+
+  apollo_admin_service:
+    image: apolloconfig/apollo-adminservice:2.3.0
+    container_name: fs-apollo-admin
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://fs-mysql:3306/ApolloConfigDB?characterEncoding=utf8
+      SPRING_DATASOURCE_USERNAME: apollo
+      SPRING_DATASOURCE_PASSWORD: admin
+    volumes:
+      - ./volumes/apollo/admin/logs:/opt/logs
+    ports:
+      - "8090:8090"
+
+  apollo_portal_service:
+    image: apolloconfig/apollo-portal:2.3.0
+    container_name: fs-apollo-portal
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://fs-mysql:3306/ApolloPortalDB?characterEncoding=utf8
+      SPRING_DATASOURCE_USERNAME: apollo
+      SPRING_DATASOURCE_PASSWORD: admin
+      APOLLO_PORTAL_ENVS: dev
+      DEV_META: http://172.18.0.3:8080
+    volumes:
+      - ./volumes/apollo/protal/logs:/opt/logs
+    ports:
+      - "8070:8070"
+
